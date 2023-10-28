@@ -1,6 +1,6 @@
 
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.19;
 
 import "./LendBorrow.sol";
 import "./IBridge.sol";
@@ -15,28 +15,18 @@ import "./IMailbox.sol";
 */
 
 contract Bridge {
-    uint256 private GAS_LIMIT_ADDBORROWINGPOWER = 1000000;
-    uint256 private GAS_LIMIT_REMOVEBORROWINGPOWER = 1000000;
+    uint256 private GAS_LIMIT_ADDBORROWINGPOWER = 3000000;
+    uint256 private GAS_LIMIT_REMOVEBORROWINGPOWER = 3000000;
+    uint256 private GAS_LIMIT_RETURNNFTOWNERSHIP = 3000000;
 
-    address public immutable i_owner;
     IMailbox public mailbox;
     IInterchainGasPaymaster public igp;
     LendBorrow public lendBorrow;
-
-modifier ownerOnly {
-        require(msg.sender == i_owner,"AddressIsNotOwner_Error");
-         _;
-    }
 
     constructor(address _mailbox, address _igp, address payable _lendBorrow) {
         mailbox = IMailbox(_mailbox);
         igp = IInterchainGasPaymaster(_igp);
         lendBorrow = LendBorrow(_lendBorrow);
-        i_owner = msg.sender;
-    }
-
-    function updatelendBorrowAddress(address payable _lendBorrow) external ownerOnly {
-    lendBorrow = LendBorrow(_lendBorrow);
     }
 
     function quoteFeeAddBorrowingPowerSend(
@@ -51,21 +41,27 @@ modifier ownerOnly {
         return igp.quoteGasPayment(destination, GAS_LIMIT_REMOVEBORROWINGPOWER);
     }
 
+    function quoteFeeGiveBackNFTOwnership(
+        uint32 destination
+    ) external view returns (uint256) {
+        return igp.quoteGasPayment(destination, GAS_LIMIT_RETURNNFTOWNERSHIP);
+    }
+
     function handle(
         uint32 _origin,
         bytes32 _sender,
         bytes calldata _message
     ) external {
-        _origin; //to avoid compiler warning
-
+        _origin;
+        _sender;
         require(
             msg.sender == address(mailbox),
             "Bridge: Only mailbox can call this function"
         );
-        require(
-            _sender == bytes32(abi.encode(this)),
-            "Bridge: Sender must be this contract on another chain"
-        );
+        // require(
+        //     _sender == bytes32(abi.encode(_destinationBridge)),
+        //     "Bridge: Sender must be this contract on another chain"
+        // );
         (uint16 messageType, uint256 DUSD_AMOUNT, address borrowerAddress) = abi.decode(
             _message,
             (uint16, uint256, address)
@@ -76,6 +72,9 @@ modifier ownerOnly {
         } else if (messageType == 2) {
             // RemoveBorrowingPower
             lendBorrow.removeBorrowingPowerByBridge(borrowerAddress);
+        }else if (messageType == 3) {
+            // RemoveBorrowingPower
+            lendBorrow.removeBorrowingPowerByBridge(borrowerAddress);
         } 
     }
 
@@ -83,12 +82,13 @@ modifier ownerOnly {
         uint32 _destination,
         uint256 _DUSD_AMOUNT,
         address _borrower,
-        address _refundAddress
+        address _refundAddress,
+        address _destinationBridge
     ) external payable {
         bytes memory message = abi.encode(1, _DUSD_AMOUNT, _borrower);
         bytes32 messageId = mailbox.dispatch(
             _destination,
-            bytes32(abi.encode(this)),
+            bytes32(abi.encode(_destinationBridge)),
             message
         );
         igp.payForGas{value: msg.value}(
@@ -103,18 +103,40 @@ modifier ownerOnly {
         uint32 _destination,
         uint256 _DUSD_AMOUNT,
         address _borrower,
-        address _refundAddress
+        address _refundAddress,
+        address _destinationBridge
     ) external payable {
         bytes memory message = abi.encode(2, _DUSD_AMOUNT, _borrower);
         bytes32 messageId = mailbox.dispatch(
             _destination,
-            bytes32(abi.encode(this)),
+            bytes32(abi.encode(_destinationBridge)),
             message
         );
         igp.payForGas{value: msg.value}(
             messageId,
             _destination,
             GAS_LIMIT_REMOVEBORROWINGPOWER, // Gas amount
+            _refundAddress
+        );
+    }
+
+     function GiveBackOwnershipOfNFTOnAllChains(
+        uint32 _destination,
+        uint256 _DUMMY_NUMBER,
+        address _borrower,
+        address _refundAddress,
+        address _destinationBridge
+    ) external payable {
+        bytes memory message = abi.encode(3, _DUMMY_NUMBER, _borrower);
+        bytes32 messageId = mailbox.dispatch(
+            _destination,
+            bytes32(abi.encode(_destinationBridge)),
+            message
+        );
+        igp.payForGas{value: msg.value}(
+            messageId,
+            _destination,
+            GAS_LIMIT_RETURNNFTOWNERSHIP, // Gas amount
             _refundAddress
         );
     }

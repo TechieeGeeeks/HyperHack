@@ -74,7 +74,7 @@ contract Bridge {
             lendBorrow.removeBorrowingPowerByBridge(borrowerAddress);
         }else if (messageType == 3) {
             // RemoveBorrowingPower
-            lendBorrow.removeBorrowingPowerByBridge(borrowerAddress);
+            lendBorrow.giveBackNftOwnerShipOnAllChains(borrowerAddress);
         } 
     }
 

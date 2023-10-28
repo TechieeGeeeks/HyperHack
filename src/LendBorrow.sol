@@ -384,6 +384,9 @@ contract LendBorrow {
                     tokens[i].tokenId
                 );
         }
+        addressToAssociatedLoan[_borrower] = 0;
+        // Clear the array for the specified borrower
+        delete ownerOfOrignalTokens[_borrower];
         
     }
 

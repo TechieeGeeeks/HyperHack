@@ -42,6 +42,7 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
 
   return (
     <div className=" max-w-6xl mx-auto ">
+
       {(chainId === 80001 && (
         <h1 className=" font-semibold text-xl text-primaryColor">
           Active Chain is Polygon
@@ -52,6 +53,7 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
             Active Chain is Sepolia
           </h1>
         ))}
+
       <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
         <h2 className=" font-semibold text-xl text-primaryColor">
           Mint an NFT
@@ -102,9 +104,16 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
           Approve
         </button>
       </div>
+
       <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
         <p style={{ color: "red" }}>Setting Up Floor price of NFT</p>
-      </div>
+      </div>  
+
+
+      <div>
+        
+      </div> 
+         
     </div>
   );
 };

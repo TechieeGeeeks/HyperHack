@@ -251,12 +251,22 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
       </div>
 
       <h1 className="text-xl text-center text-white mt-12">
+        <span className="font-semibold text-red-500">
+          Waiting For Multi Chain call approx 3mins
+        </span>
+        <br />
+        <span className="font-semibold text-green-500">
+          Now You Can switch chain to check if your borrowing power is removed
+          not
+        </span>
+      </h1>
+
+      <h1 className="text-xl text-center text-white mt-12">
         If You got the tokens then you can repay
         <br />
         <Link to='/repayloan'>
           <span className="font-semibold text-red-500">Loan Now</span>
         </Link>
-        
       </h1>
     </div>
   );

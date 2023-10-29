@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 const { ethers } = require("ethers");
 
 const TakeLoan = ({ signer, mainConfig }) => {
-  const [tokenUri, setTokenUri] = useState('');
+  const [tokenUri, setTokenUri] = useState("");
   const [tokenCounter, setTokenCounter] = useState(null);
 
   const mintNft = async () => {
@@ -14,7 +14,7 @@ const TakeLoan = ({ signer, mainConfig }) => {
       await tx.wait();
       fetchTokenCounter();
     } catch (error) {
-      console.error('Error minting NFT:', error);
+      console.error("Error minting NFT:", error);
     }
   };
 
@@ -25,17 +25,30 @@ const TakeLoan = ({ signer, mainConfig }) => {
   };
 
   return (
-    <div>
-      <h2>Mint an NFT</h2>
-      <input
-        type="text"
-        placeholder="Token URI"
-        value={tokenUri}
-        onChange={(e) => setTokenUri(e.target.value)}
-      />
-      <button onClick={mintNft}>Mint NFT</button>
-      <p>Current Token Counter is {tokenCounter}</p>
-      <button onClick={fetchTokenCounter}>Get Latest Token Counter</button>
+    <div className=" ">
+      <div className="   border flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+        <h2 className=" font-semibold text-xl text-primaryColor">Mint an NFT</h2>
+        <input
+          type="text"
+          placeholder="Token URI"
+          value={tokenUri}
+          onChange={(e) => setTokenUri(e.target.value)}
+          className=" border bg-transparent rounded-lg px-4 py-1"
+        />
+        <button onClick={mintNft} className=" bg-cardBg rounded-lg px-4 py-1">
+          Mint NFT
+        </button>
+        <p className=" text-subtitleColor">
+          Current Token Counter is{" "}
+          <span className="text-white font-medium">{tokenCounter}</span>
+        </p>
+        <button
+          onClick={fetchTokenCounter}
+          className=" bg-cardBg rounded-lg px-4 py-1"
+        >
+          Get Latest Token Counter
+        </button>
+      </div>
     </div>
   );
 };

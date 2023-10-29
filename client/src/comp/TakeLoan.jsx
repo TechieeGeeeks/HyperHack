@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 const { ethers } = require("ethers");
+
 
 const TakeLoan = ({ signer, mainConfig, chainId }) => {
   const [tokenUri, setTokenUri] = useState("");
   const [tokenCounter, setTokenCounter] = useState(null);
   const [customTokenID, setCustomTokenID] = useState("");
-  const [depositTokenID, setDepositTokenID] = useState(""); 
+  const [depositTokenID, setDepositTokenID] = useState("");
   const [borrowingPower, setBorrowingPower] = useState("");
+  const [dusdBalance, setDUSDBalance] = useState("");
 
   const mintNft = async () => {
     try {
@@ -51,6 +54,9 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
       );
       await tx.wait();
       console.log("NFT deposited successfully for Token ID:", depositTokenID);
+      alert(
+        "Now wait for 3 mins so that Borrowing Power Will be added on all chains"
+      );
     } catch (error) {
       console.error("Error depositing NFT:", error);
     }
@@ -67,6 +73,43 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
       setBorrowingPower(borrowingPowerInDecimal);
       console.log(
         `Borrowing power for address ${addressToCheck}: ${borrowingPower}`
+      );
+      // You can display the borrowing power or perform any other actions as needed.
+    } catch (error) {
+      console.error("Error checking borrowing power:", error);
+    }
+  };
+
+  const withdrawTokens = async () => {
+    if (borrowingPower <= 0) {
+      alert("Check Borrowing Power First");
+      return;
+    } else {
+      try {
+        // Call the withdrawTokens function from your contract here
+        const tx = await mainConfig.lendBorrow.withDrawTokens();
+        await tx.wait();
+        console.log("Tokens withdrawn successfully.");
+        alert(
+          "Now wait for 3 mins so that Borrowing Power Will be thrashed on all chains"
+        );
+      } catch (error) {
+        console.error("Error withdrawing tokens:", error);
+      }
+    }
+  };
+
+  const checkDUSDBalance = async () => {
+    try {
+      // Call the contract's borrowingPowerInUSD function to get the borrowing power of the provided address
+      const addressToCheck = await signer.getAddress();
+      const dusdAmount = await mainConfig.lendBorrow.giveERC20TokensBalanceOfBorrower(
+        addressToCheck
+      );
+      const dusdAmountInDecimal = parseInt(dusdAmount._hex, 16);
+      setDUSDBalance(dusdAmountInDecimal);
+      console.log(
+        `DUSD Balance for address ${addressToCheck}: ${dusdAmountInDecimal}`
       );
       // You can display the borrowing power or perform any other actions as needed.
     } catch (error) {
@@ -164,7 +207,8 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
         </span>
         <br />
         <span className="font-semibold text-green-500">
-          Now You Can switch chain and check if you can borrow tokens or not
+          Now You Can switch chain to check if you got the borrowing power or
+          not
         </span>
       </h1>
 
@@ -172,7 +216,7 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
         <h2 className="font-semibold text-xl text-primaryColor">
           Borrowing Power is {borrowingPower}
         </h2>
-        
+
         <button
           onClick={() => checkBorrowingPower()}
           className="bg-cardBg rounded-lg px-4 py-1"
@@ -180,6 +224,40 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
           Check Borrowing Power
         </button>
       </div>
+
+      <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+        <p className="font-semibold text-green-500">
+          Your Borrowing Power is {borrowingPower}
+        </p>
+
+        <button
+          onClick={withdrawTokens}
+          className="bg-cardBg rounded-lg px-4 py-1"
+        >
+          Withdraw Tokens
+        </button>
+      </div>
+
+      <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+        <h2 className="font-semibold text-xl text-primaryColor">
+          DUSD Token Balance is {dusdBalance}
+        </h2>
+        <button
+          onClick={checkDUSDBalance}
+          className="bg-cardBg rounded-lg px-4 py-1"
+        >
+          Check DUSD Balance
+        </button>
+      </div>
+
+      <h1 className="text-xl text-center text-white mt-12">
+        If You got the tokens then you can repay
+        <br />
+        <Link to='/repayloan'>
+          <span className="font-semibold text-red-500">Loan Now</span>
+        </Link>
+        
+      </h1>
     </div>
   );
 };

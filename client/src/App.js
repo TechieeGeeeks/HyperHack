@@ -46,9 +46,13 @@ const App = () => {
   });
 
   const connectWallet = async () => {
+    // console.log("ulla");
     if (window.ethereum) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       setProvider(provider);
+
+    // console.log("ulla2");
+
 
       try {
         await provider.send("eth_requestAccounts", []);
@@ -98,6 +102,9 @@ const App = () => {
         lendBorrow: lendBorrowContractOnSepolia,
         basicNFT: nftContractOnSepolia,
       });
+      const address = await signer.getAddress();
+      const balanceOfToken = await sepoliaConfig.lendBorrow.giveERC20TokensBalanceOfBorrower(address);
+      console.log(balanceOfToken)
     }
   };
 
@@ -113,14 +120,14 @@ const App = () => {
     <div className="px-8 md:px-16">
       <Navbar />
       {provider ? (
+        <div>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/takeLoan" element={<TakeLoan />} />
           <Route path="/repayLoan" element={<RepayLoan />} />
           <Route path="/liquidateNFT" element={<LiquidateNFT />} />
         </Routes>
-      ) : (
-        <div>
+      {/* ) : (    */}
           {showConnectButton ? (
             <div>
               <button
@@ -143,7 +150,7 @@ const App = () => {
             </div>
           ) : null}
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

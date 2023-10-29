@@ -29,6 +29,7 @@ import {
   BasicNFTContractAddressOnPolygon,
   BasicNFTContractABIOnPolygon,
 } from "./contract_Config/contract_Config/POLYGON/BasicNFTConfig";
+import Footer from "./comp/Footer";
 
 const { ethers } = require("ethers");
 
@@ -154,6 +155,7 @@ const App = () => {
           ) : null}
         </div>
       ) : null}
+      <Footer />     
     </div>
   );
 };

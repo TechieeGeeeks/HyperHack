@@ -10,6 +10,8 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
   const [depositTokenID, setDepositTokenID] = useState("");
   const [borrowingPower, setBorrowingPower] = useState("");
   const [dusdBalance, setDUSDBalance] = useState("");
+  const [tokenId, setTokenId] = useState("");
+  const [addressOfOwner, setAddressOfOwner] = useState("");
 
   const mintNft = async () => {
     try {
@@ -59,6 +61,17 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
       );
     } catch (error) {
       console.error("Error depositing NFT:", error);
+    }
+  };
+
+  const checkOwnerOftNFT = async () => {
+    try {
+      const addressOfNFTOwner = await mainConfig.basicNFT.ownerOf(tokenId);
+      setAddressOfOwner(addressOfNFTOwner);
+      console.log(`Owner Of NFT is  ${addressOfOwner}`);
+      // You can display the borrowing power or perform any other actions as needed.
+    } catch (error) {
+      console.error("Error checking borrowing power:", error);
     }
   };
 
@@ -198,6 +211,26 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
         />
         <button onClick={depositNFT} className="bg-cardBg rounded-lg px-4 py-1">
           Deposit NFT
+        </button>
+      </div>
+
+      <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+        <h2 className="font-semibold text-xl text-primaryColor">Check Owner</h2>
+        <p className="subtitleColor text-primaryColor">
+          Owner of NFT is {addressOfOwner}
+        </p>
+        <input
+          type="text"
+          placeholder="Token Id to Check"
+          value={tokenId}
+          onChange={(e) => setTokenId(e.target.value)}
+          className="border border-subtitleColor focus:outline-none bg-transparent rounded-lg px-4 py-1"
+        />
+        <button
+          onClick={checkOwnerOftNFT}
+          className="bg-cardBg rounded-lg px-4 py-1"
+        >
+          Check Owner
         </button>
       </div>
 

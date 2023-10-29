@@ -25,8 +25,8 @@ const TakeLoan = ({ signer, mainConfig }) => {
   };
 
   return (
-    <div className=" ">
-      <div className="   border flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+    <div className=" h-screen">
+      <div className="   shadow-[1px_1px_1px_1px_rgba(143,255,106)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
         <h2 className=" font-semibold text-xl text-primaryColor">Mint an NFT</h2>
         <input
           type="text"

@@ -45,6 +45,8 @@ const App = () => {
     lendBorrow: null,
     basicNFT: null,
   });
+  const [chainId, setChainId] = useState(null);
+
   const [mainConfig, setMainConfig] = useState(null);
 
   const connectWallet = async () => {
@@ -69,6 +71,7 @@ const App = () => {
   const connectContract = async (signer) => {
     const chainId = await signer.getChainId();
     if (chainId === 80001) {
+      setChainId(80001);
       console.log("Polygon");
       const lendBorrowContractOnPolygon = new ethers.Contract(
         LendBorrowContractAddressOnPolygon,
@@ -90,6 +93,7 @@ const App = () => {
       });
     } else {
       console.log("Sepolia");
+      setChainId(11155111);
       const lendBorrowContractOnSepolia = new ethers.Contract(
         LendBorrowContractAddressOnSepolia,
         LendBorrowContractABIOnSepolia,
@@ -127,9 +131,9 @@ const App = () => {
         <div>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/takeLoan" element={<TakeLoan signer={signer} mainConfig={mainConfig} />} />
-          <Route path="/repayLoan" element={<RepayLoan signer={signer} mainConfig={mainConfig}/>} />
-          <Route path="/liquidateNFT" element={<LiquidateNFT signer={signer} mainConfig={mainConfig}/>} />
+          <Route path="/takeLoan" element={<TakeLoan signer={signer} mainConfig={mainConfig} chainId={chainId}  />} />
+          <Route path="/repayLoan" element={<RepayLoan signer={signer} mainConfig={mainConfig}/>}  chainId={chainId} />
+          <Route path="/liquidateNFT" element={<LiquidateNFT signer={signer} mainConfig={mainConfig}  chainId={chainId}/>} />
         </Routes>
       {/* ) : (    */}
           {showConnectButton ? (

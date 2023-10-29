@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 const { ethers } = require("ethers");
 
-const TakeLoan = ({ signer, mainConfig }) => {
+const TakeLoan = ({ signer, mainConfig, chainId }) => {
   const [tokenUri, setTokenUri] = useState("");
   const [tokenCounter, setTokenCounter] = useState(null);
   const [customTokenID, setCustomTokenID] = useState(""); // State to hold the custom tokenID value
@@ -42,6 +42,16 @@ const TakeLoan = ({ signer, mainConfig }) => {
 
   return (
     <div className=" ">
+      {(chainId === 80001 && (
+        <h1 className=" font-semibold text-xl text-primaryColor">
+          Active Chain is Polygon
+        </h1>
+      )) ||
+        (chainId === 11155111 && (
+          <h1 className=" font-semibold text-xl text-primaryColor">
+            Active Chain is Sepolia
+          </h1>
+        ))}
       <div className="border flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
         <h2 className=" font-semibold text-xl text-primaryColor">
           Mint an NFT
@@ -56,8 +66,6 @@ const TakeLoan = ({ signer, mainConfig }) => {
         <button onClick={mintNft} className=" bg-cardBg rounded-lg px-4 py-1">
           Mint NFT
         </button>
-
-        
       </div>
 
       <div className="border flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">

@@ -46,14 +46,10 @@ const App = () => {
   });
 
   const connectWallet = async () => {
-    // console.log("ulla");
+    
     if (window.ethereum) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       setProvider(provider);
-
-    // console.log("ulla2");
-
-
       try {
         await provider.send("eth_requestAccounts", []);
         const signer = provider.getSigner();
@@ -93,6 +89,7 @@ const App = () => {
         LendBorrowContractABIOnSepolia,
         signer
       );
+      
       const nftContractOnSepolia = new ethers.Contract(
         BasicNFTContractAddressOnSepolia,
         BasicNFTContractABIOnSepolia,
@@ -103,8 +100,7 @@ const App = () => {
         basicNFT: nftContractOnSepolia,
       });
       const address = await signer.getAddress();
-      const balanceOfToken = await sepoliaConfig.lendBorrow.giveERC20TokensBalanceOfBorrower(address);
-      console.log(balanceOfToken)
+      console.log(address);
     }
   };
 

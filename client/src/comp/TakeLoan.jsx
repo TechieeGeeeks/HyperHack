@@ -42,7 +42,7 @@ const TakeLoan = ({ signer, mainConfig }) => {
 
   return (
     <div className=" ">
-      <div className="border flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+      <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
         <h2 className=" font-semibold text-xl text-primaryColor">
           Mint an NFT
         </h2>
@@ -51,7 +51,7 @@ const TakeLoan = ({ signer, mainConfig }) => {
           placeholder="Token URI"
           value={tokenUri}
           onChange={(e) => setTokenUri(e.target.value)}
-          className=" border bg-transparent rounded-lg px-4 py-1"
+          className=" border border-subtitleColor focus:outline-none bg-transparent rounded-lg px-4 py-1"
         />
         <button onClick={mintNft} className=" bg-cardBg rounded-lg px-4 py-1">
           Mint NFT
@@ -60,7 +60,7 @@ const TakeLoan = ({ signer, mainConfig }) => {
         
       </div>
 
-      <div className="border flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+      <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
         <h2 className=" font-semibold text-xl text-primaryColor">
           Get The Latest Count of Available NFT
         </h2>
@@ -76,7 +76,7 @@ const TakeLoan = ({ signer, mainConfig }) => {
         </button>
       </div>
 
-      <div className="border flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+      <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
         <h2 className=" font-semibold text-xl text-primaryColor">
           Approve Lend Borrow Contract to pull NFT
         </h2>
@@ -85,7 +85,7 @@ const TakeLoan = ({ signer, mainConfig }) => {
           placeholder="Nft Token ID"
           value={customTokenID}
           onChange={(e) => setCustomTokenID(e.target.value)}
-          className=" border bg-transparent rounded-lg px-4 py-1"
+          className=" border border-subtitleColor focus:outline-none bg-transparent rounded-lg px-4 py-1"
         />
         <button
           onClick={approveAddress}

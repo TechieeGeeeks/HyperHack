@@ -4,12 +4,12 @@ import Lottie from "lottie-react";
 
 const HeroComp = () => {
   return (
-    <div class="md:grid md:grid-flow-col md:gap-16 md:mt-28 justify-center">
-      <div class="md:hidden flex col-span-2 text-center md:text-left mt-6 md:mt-0 text-[3.5rem] md:text-[9.5rem] font-extrabold leading-tight">
+    <div className="md:grid md:grid-flow-col md:gap-16 md:mt-28 justify-center">
+      <div className="md:hidden flex col-span-2 text-center md:text-left mt-6 md:mt-0 text-[3.5rem] md:text-[9.5rem] font-extrabold leading-tight">
         Start Making Money With NFT's
       </div>
 
-      <div class="row-span-3 flex flex-col">
+      <div className="row-span-3 flex flex-col">
         <Lottie animationData={heroAnimation} />
 
         <p className=" text-subtitleColor md:pl-10 text-center md:text-left">
@@ -21,7 +21,7 @@ const HeroComp = () => {
         </button>
       </div>
 
-      <div class="hidden md:flex col-span-2 text-center md:text-left mt-6 md:mt-0 text-[3.5rem] md:text-[8.5rem] font-extrabold leading-tight">
+      <div className="hidden md:flex col-span-2 text-center md:text-left mt-6 md:mt-0 text-[3.5rem] md:text-[8.5rem] font-extrabold leading-tight">
         Start Making Money With NFT's
       </div>
       {/* <div class="row-span-2 col-span-2">03</div> */}

@@ -21,16 +21,12 @@ const Navbar = () => {
           <Link to="/takeLoan">
             <li className=" cursor-pointer">Take Loan</li>
           </Link>
-          {isLoggedIn ? (
-            <div className="flex gap-14">
-              <Link to="/repayLoan">
-                <li className=" cursor-pointer">Repay Loan</li>
-              </Link>
-              <li className=" cursor-pointer text-red-200">Sign Out</li>
-            </div>
-          ) : (
-            <li className=" cursor-pointer">Sign In</li>
-          )}
+          <Link to="/repayloan">
+            <li className=" cursor-pointer">Repay Loan</li>
+          </Link>
+          <Link to="/liquidatenft">
+            <li className=" cursor-pointer">Liquidate NFT</li>
+          </Link>
         </ul>
       </div>
 

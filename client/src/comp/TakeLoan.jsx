@@ -45,19 +45,19 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
       {(chainId === 80001 && (
         <h1 className="  text-xl text-center text-white mt-12">
           Active Chain is{" "}
-          <span className=" font-semibold text-primaryColor ">Polygon</span>
+          <span className=" font-semibold text-red-500 ">Polygon</span>
         </h1>
       )) ||
         (chainId === 11155111 && (
           <h1 className="  text-xl text-center text-white mt-12">
             Active Chain is{" "}
-            <span className=" font-semibold text-primaryColor ">Sepolia</span>
+            <span className=" font-semibold text-red-500 ">Sepolia</span>
           </h1>
         ))}
 
       {/* <h1 className="  text-xl text-center text-white mt-12">
         Active Chain is{" "}
-        <span className=" font-semibold text-primaryColor ">Sepolia</span>
+        <span className=" font-semibold text-red-500 ">Sepolia</span>
       </h1> */}
 
       <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">

@@ -102,6 +102,9 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
           Approve
         </button>
       </div>
+      <div className="shadow-[0.8px_0.8px_1px_1px_rgba(143,255,106,1)] flex flex-col gap-3 text-center p-5 px-6 max-w-6xl rounded-lg mx-auto mt-12">
+        <p style={{ color: "red" }}>Setting Up Floor price of NFT</p>
+      </div>
     </div>
   );
 };

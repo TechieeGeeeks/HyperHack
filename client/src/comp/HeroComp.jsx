@@ -13,7 +13,7 @@ const HeroComp = () => {
       <div className="row-span-3 flex flex-col -mt-10">
         <Lottie animationData={heroAnimation} />
 
-        <p className=" text-subtitleColor md:pl-10 text-center md:text-left text-sm">
+        <p className=" opacity-75 md:pl-10 text-center md:text-left text-sm">
           Welcome to the Cross Chain NFT Lending Platform, a revolutionary
           decentralized finance (DeFi) project that empowers NFT holders to
           leverage the value of their NFT assets across different blockchain

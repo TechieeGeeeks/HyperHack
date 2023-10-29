@@ -41,7 +41,7 @@ const TakeLoan = ({ signer, mainConfig, chainId }) => {
   };
 
   return (
-    <div className=" ">
+    <div className=" max-w-6xl mx-auto ">
       {(chainId === 80001 && (
         <h1 className=" font-semibold text-xl text-primaryColor">
           Active Chain is Polygon

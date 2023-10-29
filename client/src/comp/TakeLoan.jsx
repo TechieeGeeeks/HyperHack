@@ -1,23 +1,27 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react';
+const { ethers } = require("ethers");
 
-const TakeLoan = ({signer, mainConfig}) => {
+const TakeLoan = ({ signer, mainConfig }) => {
   const [tokenUri, setTokenUri] = useState('');
-  const [message, setMessage] = useState('');
+  const [tokenCounter, setTokenCounter] = useState(null);
 
   const mintNft = async () => {
     try {
       if (!tokenUri) {
-        setMessage('Please enter a token URI.');
         return;
       }
       const tx = await mainConfig.basicNFT.mintNft(tokenUri);
       await tx.wait();
-      setMessage('NFT minted successfully!');
+      fetchTokenCounter();
     } catch (error) {
       console.error('Error minting NFT:', error);
-      setMessage('Error minting NFT.');
     }
+  };
+
+  const fetchTokenCounter = async () => {
+    const latestCount = await mainConfig.basicNFT.getTokenCounter();
+    const decimalNumber = parseInt(latestCount._hex, 16);
+    setTokenCounter(2);
   };
 
   return (
@@ -30,9 +34,10 @@ const TakeLoan = ({signer, mainConfig}) => {
         onChange={(e) => setTokenUri(e.target.value)}
       />
       <button onClick={mintNft}>Mint NFT</button>
-      <p>{message}</p>
+      <p>Current Token Counter is {tokenCounter}</p>
+      <button onClick={fetchTokenCounter}>Get Latest Token Counter</button>
     </div>
   );
-}
+};
 
-export default TakeLoan
+export default TakeLoan;

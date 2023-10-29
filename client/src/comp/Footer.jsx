@@ -22,13 +22,13 @@ const Footer = () => {
               <Link to="/" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Home</Link>
             </li>
             <li className="mb-2">
-              <Link to="/takeLoan" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">About us</Link>
+              <Link to="/takeLoan" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Take Loan</Link>
             </li>
             <li className="mb-2">
-              <Link to="/repayloan" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Company values</Link>
+              <Link to="/repayloan" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Repay Loan</Link>
             </li>
             <li className="mb-2">
-              <Link to="/liquidatenft" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Pricing</Link>
+              <Link to="/liquidatenft" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Liquidate NFT</Link>
             </li>
           </ul>
         </div>

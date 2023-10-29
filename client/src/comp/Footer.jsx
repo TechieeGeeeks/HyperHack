@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer>
-      <div className="mx-auto px-4 sm:px-6">
+      <div className="mx-auto px-4 sm:px-6 mt-20">
         {/* Top area: Blocks */}
         <div className="grid sm:grid-cols-12 gap-8 py-8 md:py-12 border-t border-gray-200">
           {/* 1st block */}
@@ -14,26 +15,23 @@ const Footer = () => {
           </div>
 
           {/* 4th block */}
-          {/* <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
-          <h6 className="text-gray-800 font-medium mb-2">Quick Links</h6>
+          <div className="sm:col-span-6 md:col-span-3 lg:col-span-2">
+          <h6 className="font-medium mb-2">Quick Links</h6>
           <ul className="text-sm">
             <li className="mb-2">
-              <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Home</a>
+              <Link to="/" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Home</Link>
             </li>
             <li className="mb-2">
-              <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">About us</a>
+              <Link to="/takeLoan" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">About us</Link>
             </li>
             <li className="mb-2">
-              <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Company values</a>
+              <Link to="/repayloan" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Company values</Link>
             </li>
             <li className="mb-2">
-              <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Pricing</a>
-            </li>
-            <li className="mb-2">
-              <a href="#0" className="text-gray-600 hover:text-gray-900 transition duration-150 ease-in-out">Privacy Policy</a>
+              <Link to="/liquidatenft" className="text-gray-600 hover:text-white transition duration-150 ease-in-out">Pricing</Link>
             </li>
           </ul>
-        </div> */}
+        </div>
 
           {/* 5th block */}
           <div className="sm:col-span-6 md:col-span-3 lg:col-span-3">

@@ -22,9 +22,10 @@ Welcome to the Cross-Chain Lending and Borrowing DApp, a revolutionary decentral
 
 For a detailed explanation of how this DApp works, please refer to the following demo videos:
 
+- [Project Explanation](https://www.loom.com/share/548ee6cca5d14c4c843915d80b1468fd?sid=fbf4f047-5c22-4b5d-8215-7f6ce2b8f033)
 - [Cross-Chain Lending and Borrowing Demo](https://www.loom.com/share/d61eec9f61714308929ec46007c8e1a9?sid=16788416-02d9-4681-a578-b869a468a965)
 - [Setting Up the Project](https://www.loom.com/share/d77d02468bb24e1b829491cb81ed4470?sid=6ee5b2b3-9b9a-45be-88d7-c44ccbb818ab)
-- [Project Explanation](https://www.loom.com/share/548ee6cca5d14c4c843915d80b1468fd?sid=fbf4f047-5c22-4b5d-8215-7f6ce2b8f033)
+
 
 These videos provide an in-depth understanding of the project, including setup instructions and an overview of its features.
 

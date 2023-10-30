@@ -13,8 +13,6 @@
   - [Configuration](#configuration)
 - [Usage](#usage)
 - [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 

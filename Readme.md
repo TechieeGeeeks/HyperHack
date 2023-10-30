@@ -39,4 +39,130 @@ Our DApp simplifies the process of lending and borrowing NFTs across various blo
 - **Multi-Chain Token Withdrawal:** Withdraw tokens from any available chain.
 - **Multi-Chain Loan Repayment:** Repay loans on any chain.
 
+## Core Features
+
+### 1. Deposit NFT
+
+The `depositNFT` function allows users to deposit NFTs on multiple blockchain networks. When a user deposits an NFT, the DApp calculates its worth and adds it to their borrowing power, which can be used to borrow tokens.
+
+```solidity
+// Solidity code for depositNFT function
+function depositNFT(address tokenContractAddress, uint256 tokenID) external ownerOnly {
+    // Check if the NFT has worth in the contract
+    if (contractAddressToTokenIdToDUSDBorrowableAmount[tokenContractAddress][tokenID] == 0) {
+        revert LendBorrow_TokenDoesNotHaveWorthInContrat();
+    }
+    
+    // Check if the contract is allowed to pull the NFT
+    if (IERC721(tokenContractAddress).getApproved(tokenID) != address(this)) {
+        revert LendBorrow_ContractIsNotAllowedToPullToken();
+    }
+
+    // Transfer NFT ownership to this contract
+    IERC721(tokenContractAddress).transferFrom(msg.sender, address(this), tokenID);
+
+    // Store the ownership of NFT in the array
+    OriginalToken memory newToken = OriginalToken(tokenContractAddress, tokenID);
+    ownerOfOrignalTokens[msg.sender].push(newToken);
+
+    // Calculate DUSD loan amount and update borrowing power
+    uint256 DUSD_LOAN_AMOUNT = contractAddressToTokenIdToDUSDBorrowableAmount[tokenContractAddress][tokenID];
+    borrowingPowerInUSD[msg.sender] += DUSD_LOAN_AMOUNT;
+
+    // Give borrowing power on all chains
+    for (uint32 i = 0; i < chainIds.length; i++) {
+        if (block.chainid != chainIds[i]) {
+            uint32 chainId = chainIds[i];
+            uint256 fee = IBridge(bridge).quoteFeeAddBorrowingPowerSend(chainId);
+            IBridge(bridge).AddBorrowingPowerSend{value: fee}(
+                chainId,
+                DUSD_LOAN_AMOUNT,
+                msg.sender,
+                msg.sender,
+                chainAddress[i]
+            );
+        }
+    }
+}
+```
+
+### 2. Withdraw Tokens
+
+The `withdrawTokens` function allows users to withdraw tokens using their borrowing power. When tokens are withdrawn, the user's borrowing power decreases.
+
+```solidity
+// Solidity code for withdrawTokens function
+function withDrawTokens() external {
+    // Check if the borrower has borrowing power
+    if (borrowingPowerInUSD[msg.sender] == 0) {
+        revert LendBorrow_UserDoesNotHaveBorrowingPower();
+    }
+
+    // Get the borrowing power and mint DUSD on the borrower's address
+    uint256 loanDUSD = borrowingPowerInUSD[msg.sender];
+    DUSD(dusdContract).mint(msg.sender, loanDUSD);
+
+    if (ownerOfOrignalTokens[msg.sender].length != 0) {
+        makeReadyToAcceptLoanAmountWhenTokensWherePulledFromMainChain(msg.sender, loanDUSD);
+    } else {
+        // Reset the borrowing power
+        borrowingPowerInUSD[msg.sender] = 0;
+        addressToAssociatedLoan[msg.sender] = loanDUSD;
+        
+        // Remove borrowing power on all chains
+        for (uint i = 0; i < chainIds.length; i++) {
+            if (block.chainid != chainIds[i]) {
+                uint32 chainId = chainIds[i];
+                uint256 fee = IBridge(bridge).quoteFeeRemoveBorrowingPowerSend(chainId);
+                IBridge(bridge).RemoveBorrowingPowerSend{value: fee}(
+                    chainId,
+                    loanDUSD,
+                    msg.sender,
+                    msg.sender,
+                    chainAddress[i]
+                );
+            }
+        }
+    }
+}
+```
+
+### 3. Repay Loan
+
+The `repayLoan` function allows users to repay their loans and regain ownership of their NFTs. To repay a loan, the user must specify the borrower's address.
+
+```solidity
+// Solidity code for repayLoan function
+function repayLoan(address _borrower) external {
+    if (_borrower == address(0)) {
+        revert LendBorrow_AddressShouldNotBeEqualToZero();
+    }
+
+    if (ownerOfOrignalTokens[_borrower].length == 0) {
+        revert LendBorrow_NFTDoesNotLendOnThisChain();
+    }
+
+    if (addressToAssociatedLoan[_borrower] < 0) {
+        revert LendBorrow_UserDoesNotHaveAnyLoanPending();
+    }
+
+    uint256 loanToPay = addressToAssociatedLoan[_borrower];
+
+    if (DUSD(dusdContract
+
+).transferFrom(msg.sender, address(this), loanToPay)) {
+        DUSD(dusdContract).burn(loanToPay);
+
+        // Transfer NFT ownership back to the borrower
+        for (uint256 i = 0; i < ownerOfOrignalTokens[_borrower].length; i++) {
+            IERC721(ownerOfOrignalTokens[_borrower][i].contractAddress).transferFrom(address(this), _borrower, ownerOfOrignalTokens[_borrower][i].tokenId);
+        }
+
+        // Reset the borrower's borrowing power
+        borrowingPowerInUSD[_borrower] = 0;
+        addressToAssociatedLoan[_borrower] = 0;
+    }
+}
+```
+
 This DApp opens up limitless possibilities for cross-chain NFT lending and borrowing.

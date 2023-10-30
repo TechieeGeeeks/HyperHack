@@ -11,10 +11,6 @@
 
 - [Introduction](#introduction)
 - [Demo](#demo)
-- [Getting Started](#getting-started)
-  - [Setup](#setup)
-  - [Installation](#installation)
-  - [Configuration](#configuration)
 - [Usage](#usage)
 - [Features](#features)
 

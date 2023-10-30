@@ -1,11 +1,10 @@
 
 # Cross-Chain Lending and Borrowing DApp
-
 <div style="text-align:center;" >
     <img  src="https://github.com/TechieeGeeeks/HyperHack/assets/99035115/c92a05b9-0262-4b67-b3fa-684710c76585" alt="Project Logo" height="500">
 </div>
 
-
+_This project is a submition to HyperHack 2.0 hackaton. [Project page](https://hyperhack.hyperlaneindia.xyz/)_
 
 ## Table of Contents
 

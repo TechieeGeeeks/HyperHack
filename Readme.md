@@ -1,13 +1,9 @@
 
 # Cross-Chain Lending and Borrowing DApp
 
-### This project is a submition to HyperHack 2.0 hackaton. 
+### This project is a submission to HyperHack 2.0 hackathon.
 
-<div style="text-align:center;" >
-    <img  src="https://github.com/TechieeGeeeks/HyperHack/assets/99035115/c92a05b9-0262-4b67-b3fa-684710c76585" alt="Project Logo" height="500">
-</div>
-
-
+![Project Logo](https://github.com/TechieeGeeeks/HyperHack/assets/99035115/c92a05b9-0262-4b67-b3fa-684710c76585)
 
 ## Table of Contents
 
@@ -15,7 +11,7 @@
 - [Demo](#demo)
 - [Usage](#usage)
 - [Features](#features)
-- [Detailed Explaination](#Detailed Explaination)
+- [Detailed Explanation](#detailed-explanation)
 
 ## Introduction
 
@@ -29,14 +25,13 @@ For a detailed explanation of how this DApp works, please refer to the following
 - [Cross-Chain Lending and Borrowing Demo](https://www.loom.com/share/d61eec9f61714308929ec46007c8e1a9?sid=16788416-02d9-4681-a578-b869a468a965)
 - [Setting Up the Project](https://www.loom.com/share/d77d02468bb24e1b829491cb81ed4470?sid=6ee5b2b3-9b9a-45be-88d7-c44ccbb818ab)
 
-
 These videos provide an in-depth understanding of the project, including setup instructions and an overview of its features.
 
 ## Usage
 
 Our DApp simplifies the process of lending and borrowing NFTs across various blockchain networks. You can deposit NFTs on any chain, accumulate borrowing power, and withdraw tokens from any available chain. Loan repayment can also be done on any chain.
 
-## Detailed Explaination
+## Detailed Explanation
 
 **Project Explanation**
 
@@ -85,6 +80,8 @@ function depositNFT(address tokenContractAddress, uint256 tokenID) external owne
                 msg.sender,
                 chainAddress[i]
             );
+
+
         }
     }
 }

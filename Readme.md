@@ -15,6 +15,7 @@
 - [Demo](#demo)
 - [Usage](#usage)
 - [Features](#features)
+- [Detailed Explaination](#Detailed Explaination)
 
 ## Introduction
 
@@ -34,6 +35,24 @@ These videos provide an in-depth understanding of the project, including setup i
 ## Usage
 
 Our DApp simplifies the process of lending and borrowing NFTs across various blockchain networks. You can deposit NFTs on any chain, accumulate borrowing power, and withdraw tokens from any available chain. Loan repayment can also be done on any chain.
+
+## Detailed Explaination
+
+**Project Explanation**
+
+The Cross-Chain Lending and Borrowing DApp is a remarkable submission to the HyperHack 2.0 hackathon. This innovative decentralized application, developed to simplify the lending and borrowing of NFTs across different blockchain networks, addresses the common challenges faced by NFT owners when they seek loans across multiple chains.
+
+Suppose you own NFTs on various blockchain networks and you require a loan. This DApp provides a comprehensive solution by enabling cross-chain lending and borrowing for NFTs. This project can be understood as the culmination of a series of solutions to five significant problems.
+
+1. **Multiple Chain NFTs and Loans**: Imagine you have NFTs with a total value of $1200, with $500 worth of NFTs on Ethereum and $700 worth of NFTs on Polygon. In the traditional lending and borrowing space, you would need to lend your NFTs on separate protocols, such as Bentdao for Ethereum and a similar protocol for Polygon. This complicates the lending process, and there's a catch with platforms like Polygon. In Polygon's NFT lending and borrowing space, you must consider the health factor of your NFTs. If the health factor falls below a specific threshold, your valuable NFTs might get liquidated. Consequently, you must continuously monitor your NFTs across various all protocols all chains and ensure their floor price remains higher than the loan amount. This poses a considerable challenge to NFT owners.
+
+2. **Repaying Loans Across Multiple Protocols**: Even if you successfully lend your NFTs on multiple protocols, you will face the daunting task of repaying loans across those different platforms. For instance, if you've lent an NFT on bentDao on Ethereum chain, you will have to repay the loan on Ethereum. Similarly, you'll have to do the same for any other blockchain on which you've engaged in lending. This cumbersome process requires constant communication with multiple protocols, making it complex and time-consuming.
+
+Recognizing these five problems, the project presents a holistic solution: a Cross-Chain Lending and Borrowing platform built on HyperLane. It offers a streamlined approach to lending, borrowing, and managing NFTs. The central idea is to allow users to deposit an NFT on any chain, thereby accumulating a borrowing power in the form of USD tokens. This borrowing power can be flexibly utilized for borrowing tokens across multiple chains.
+
+Consider a scenario where you've lent NFTs on three different chains: $100 worth on Ethereum, $100 on Polygon Mumbai, and $100 on Avalanche Fuji. The DApp ensures that all three chains are synchronized. It will inform all three chains that a specific wallet address has $300 worth of borrowing power. As a result, you can easily borrow $300 worth of USD tokens from any chain. When it's time to repay the loan, the DApp ensures that all chains are aware of your outstanding loan amount, which, in this case, is $300. You can then repay the loan on any of the supported chains. If the conditions are met, all chains will release ownership of your NFTs back to you.
+
+In summary, the Cross-Chain Lending and Borrowing DApp introduces a game-changing approach to the lending and borrowing of NFTs. By enabling cross-chain NFT deposits, accumulating borrowing power, withdrawing tokens from various chains, and repaying loans with unmatched flexibility, it opens up a world of possibilities for NFT owners and borrowers. This project promises to simplify and enhance the NFT lending and borrowing experience across the blockchain landscape.
 
 ## Features
 

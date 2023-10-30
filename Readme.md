@@ -1,7 +1,7 @@
 
 # Cross-Chain Lending and Borrowing DApp
 
-<h2> _This project is a submition to HyperHack 2.0 hackaton.</h2>
+## This project is a submition to HyperHack 2.0 hackaton. 
 
 <div style="text-align:center;" >
     <img  src="https://github.com/TechieeGeeeks/HyperHack/assets/99035115/c92a05b9-0262-4b67-b3fa-684710c76585" alt="Project Logo" height="500">

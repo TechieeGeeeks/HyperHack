@@ -1,7 +1,7 @@
 
 # Cross-Chain Lending and Borrowing DApp
 
-![Project Logo](link_to_logo_or_image.png)
+![Project Logo](https://github.com/TechieeGeeeks/HyperHack/assets/99035115/c92a05b9-0262-4b67-b3fa-684710c76585)
 
 ## Table of Contents
 

@@ -373,11 +373,12 @@ contract LendBorrow {
         // First remove the Associated loan for address of borrower 
         addressToAssociatedLoan[_borrower] = 0;
 
-        // Now check if there is any NFT Deposited on this chain if there is not NFT deposited then simply return 
+        // If there is no NFT lended simply return
         if (ownerOfOrignalTokens[_borrower].length == 0) {
                 return;
             }
-
+        
+        // OR if there is any NFT Deposited on this chain if there is no NFT deposited then simply return 
         // Move NFT back to msg.msg.sender
         OriginalToken[] storage tokens = ownerOfOrignalTokens[_borrower];
         uint256 tokenCount = tokens.length;

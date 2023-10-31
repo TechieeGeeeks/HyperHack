@@ -369,8 +369,13 @@ contract LendBorrow {
         if(_borrower == address(0)){
                 revert LendBorrow_AddressShouldNotBeEqualToZero();
             }
+
+        // First remove the Associated loan for address of borrower 
+        addressToAssociatedLoan[_borrower] = 0;
+
+        // Now check if there is any NFT Deposited on this chain if there is not NFT deposited then simply return 
         if (ownerOfOrignalTokens[_borrower].length == 0) {
-                revert LendBorrow_NFTDoesNotLendOnThisChain();
+                return;
             }
 
         // Move NFT back to msg.msg.sender
@@ -384,7 +389,7 @@ contract LendBorrow {
                     tokens[i].tokenId
                 );
         }
-        addressToAssociatedLoan[_borrower] = 0;
+        
         // Clear the array for the specified borrower
         delete ownerOfOrignalTokens[_borrower];
         

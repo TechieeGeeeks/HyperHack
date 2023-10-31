@@ -369,7 +369,7 @@ contract LendBorrow {
         if(_borrower == address(0)){
                 revert LendBorrow_AddressShouldNotBeEqualToZero();
             }
-
+        
         // First remove the Associated loan for address of borrower 
         addressToAssociatedLoan[_borrower] = 0;
 

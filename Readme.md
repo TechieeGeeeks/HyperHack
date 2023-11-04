@@ -145,3 +145,5 @@ function repayLoan(address _borrower) external {
 ```
 
 This DApp opens up limitless possibilities for cross-chain NFT lending and borrowing.
+
+Copyright - [@DevSwayam](https://github.com/DevSwayam)
